@@ -229,3 +229,425 @@
   .item-title {
     font-size: .95rem;
     font-weight: 500;
+    color: #212121;
+    margin-bottom: 4px;
+  }
+
+  .item-service {
+    font-size: .8rem;
+    color: #757575;
+  }
+
+  .item-code {
+    font-family: 'Courier New', monospace;
+    font-size: .85rem;
+    color: #424242;
+    direction: ltr;
+    text-align: right;
+    margin-bottom: 12px;
+    background: #fff;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .item-code .material-icons {
+    font-size: 16px;
+    color: #9e9e9e;
+  }
+
+  .item-actions {
+    display: flex;
+    gap: 8px;
+  }
+
+  .btn-sm {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: .8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all .2s;
+    font-family: 'Estedad', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+  }
+
+  .btn-sm .material-icons {
+    font-size: 16px;
+  }
+
+  .btn-track {
+    background: #fff;
+    color: #1976d2;
+    border: 1px solid #1976d2;
+  }
+
+  .btn-track:hover {
+    background: #1976d2;
+    color: #fff;
+  }
+
+  .btn-copy {
+    background: #fff;
+    color: #757575;
+    border: 1px solid #e0e0e0;
+  }
+
+  .btn-copy:hover {
+    background: #f5f5f5;
+  }
+
+  .btn-del {
+    background: #fff;
+    color: #d32f2f;
+    border: 1px solid #e0e0e0;
+    flex: 0 0 auto;
+    padding: 8px;
+  }
+
+  .btn-del:hover {
+    background: #ffebee;
+  }
+
+  .empty {
+    text-align: center;
+    padding: 60px 20px;
+    color: #9e9e9e;
+  }
+
+  .empty-icon {
+    font-size: 64px;
+    color: #e0e0e0;
+    margin-bottom: 16px;
+  }
+
+  .empty-text {
+    font-size: .95rem;
+    font-weight: 400;
+  }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: #323232;
+    color: #fff;
+    padding: 12px 24px;
+    border-radius: 4px;
+    font-size: .9rem;
+    font-weight: 400;
+    opacity: 0;
+    transition: all .3s;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 3px 8px rgba(0,0,0,.3);
+  }
+
+  .toast .material-icons {
+    font-size: 18px;
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+    opacity: 1;
+  }
+
+  /* Responsive */
+  @media (max-width: 480px) {
+    .container {
+      padding: 0 16px;
+      margin: 16px auto;
+    }
+    
+    .card {
+      padding: 20px;
+    }
+
+    .stats {
+      flex-direction: column;
+      gap: 8px;
+    }
+    
+    header h1 {
+      font-size: 1.2rem;
+    }
+
+    .item-actions {
+      flex-wrap: wrap;
+    }
+
+    .btn-sm {
+      min-width: calc(50% - 4px);
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-content">
+    <span class="material-icons header-icon">local_shipping</span>
+    <h1>پست‌چی</h1>
+  </div>
+</header>
+
+<div class="container">
+  <!-- آمار -->
+  <div class="stats">
+    <div class="stat">
+      <span class="material-icons stat-icon">inventory_2</span>
+      <div class="stat-content">
+        <div class="stat-number" id="totalCount">0</div>
+        <div class="stat-label">مرسوله</div>
+      </div>
+    </div>
+    <div class="stat">
+      <span class="material-icons stat-icon">business</span>
+      <div class="stat-content">
+        <div class="stat-number" id="servicesCount">0</div>
+        <div class="stat-label">شرکت</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- فرم افزودن -->
+  <div class="card">
+    <div class="card-title">
+      <span class="material-icons">add_circle_outline</span>
+      افزودن مرسوله جدید
+    </div>
+    
+    <div class="form-group">
+      <label>عنوان</label>
+      <input type="text" id="title" placeholder="مثلاً: خرید دیجی‌کالا">
+    </div>
+
+    <div class="form-group">
+      <label>کد پیگیری</label>
+      <input type="text" id="code" placeholder="کد رهگیری را وارد کنید" dir="ltr">
+    </div>
+
+    <div class="form-group">
+      <label>شرکت پستی</label>
+      <select id="service"></select>
+    </div>
+
+    <button class="btn btn-primary" onclick="addItem()">
+      <span class="material-icons">save</span>
+      ذخیره
+    </button>
+  </div>
+
+  <!-- لیست مرسوله‌ها -->
+  <div class="card">
+    <div class="card-title">
+      <span class="material-icons">list</span>
+      مرسوله‌های من
+    </div>
+    <div class="items-container" id="list"></div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast">
+  <span class="material-icons">info</span>
+  <span id="toastText"></span>
+</div>
+
+<script>
+// تمام شرکت‌های پستی ایران
+const SERVICES = {
+  post: {
+    name: 'پست ایران',
+    url: code => `https://tracking.post.ir/?id=${code}`
+  },
+  tipax: {
+    name: 'تیپاکس',
+    url: code => `https://tipaxco.com/tracking?code=${code}`
+  },
+  postex: {
+    name: 'پستکس',
+    url: code => `https://postex.ir/tracking?code=${code}`
+  },
+  chapar: {
+    name: 'چاپار',
+    url: code => `https://chapar.post.ir/track/${code}`
+  },
+  alopeyk: {
+    name: 'الوپیک',
+    url: code => `https://alopeyk.com/tracking/${code}`
+  },
+  miare: {
+    name: 'میاره',
+    url: code => `https://miare.ir/tracking?code=${code}`
+  },
+  snapp: {
+    name: 'اسنپ باکس',
+    url: code => `https://snapp.market/tracking/${code}`
+  },
+  mahex: {
+    name: 'ماهکس',
+    url: code => `https://mahex.com/track?code=${code}`
+  }
+};
+
+// پر کردن select
+function initServices() {
+  const select = document.getElementById('service');
+  select.innerHTML = Object.keys(SERVICES)
+    .map(key => `<option value="${key}">${SERVICES[key].name}</option>`)
+    .join('');
+}
+
+// Toast
+function showToast(msg, icon = 'info') {
+  const toast = document.getElementById('toast');
+  const toastText = document.getElementById('toastText');
+  const toastIcon = toast.querySelector('.material-icons');
+  
+  toastIcon.textContent = icon;
+  toastText.textContent = msg;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+// localStorage
+function getItems() {
+  return JSON.parse(localStorage.getItem('postchi_parcels') || '[]');
+}
+
+function saveItems(items) {
+  localStorage.setItem('postchi_parcels', JSON.stringify(items));
+}
+
+// آمار
+function updateStats() {
+  const items = getItems();
+  document.getElementById('totalCount').textContent = items.length;
+  
+  const uniqueServices = new Set(items.map(i => i.service));
+  document.getElementById('servicesCount').textContent = uniqueServices.size;
+}
+
+// افزودن
+function addItem() {
+  const title = document.getElementById('title').value.trim();
+  const code = document.getElementById('code').value.trim();
+  const service = document.getElementById('service').value;
+
+  if (!code) {
+    showToast('کد پیگیری را وارد کنید', 'error');
+    return;
+  }
+
+  const items = getItems();
+  items.unshift({
+    id: Date.now(),
+    title: title || 'بدون عنوان',
+    code,
+    service,
+    createdAt: new Date().toLocaleDateString('fa-IR')
+  });
+  saveItems(items);
+
+  document.getElementById('title').value = '';
+  document.getElementById('code').value = '';
+  
+  showToast('مرسوله ذخیره شد', 'check_circle');
+  render();
+}
+
+// حذف
+function delItem(id) {
+  if (!confirm('این مرسوله حذف شود؟')) return;
+  saveItems(getItems().filter(i => i.id !== id));
+  showToast('مرسوله حذف شد', 'delete');
+  render();
+}
+
+// پیگیری
+function track(id) {
+  const item = getItems().find(i => i.id === id);
+  if (item) {
+    window.open(SERVICES[item.service].url(item.code), '_blank');
+    showToast('در حال باز کردن...', 'open_in_new');
+  }
+}
+
+// کپی
+function copyCode(code) {
+  navigator.clipboard.writeText(code).then(() => {
+    showToast('کد کپی شد', 'content_copy');
+  });
+}
+
+// نمایش
+function render() {
+  const items = getItems();
+  const list = document.getElementById('list');
+  
+  updateStats();
+
+  if (!items.length) {
+    list.innerHTML = `
+      <div class="empty">
+        <span class="material-icons empty-icon">inbox</span>
+        <div class="empty-text">هنوز مرسوله‌ای ثبت نشده</div>
+      </div>
+    `;
+    return;
+  }
+
+  list.innerHTML = items.map(i => `
+    <div class="item">
+      <div class="item-header">
+        <span class="material-icons item-icon">package_2</span>
+        <div class="item-content">
+          <div class="item-title">${i.title}</div>
+          <div class="item-service">${SERVICES[i.service].name}</div>
+        </div>
+      </div>
+      <div class="item-code">
+        <span class="material-icons">tag</span>
+        ${i.code}
+      </div>
+      <div class="item-actions">
+        <button class="btn-sm btn-track" onclick="track(${i.id})">
+          <span class="material-icons">send</span>
+          پیگیری
+        </button>
+        <button class="btn-sm btn-copy" onclick="copyCode('${i.code}')">
+          <span class="material-icons">content_copy</span>
+          کپی
+        </button>
+        <button class="btn-sm btn-del" onclick="delItem(${i.id})">
+          <span class="material-icons">delete</span>
+        </button>
+      </div>
+    </div>
+  `).join('');
+}
+
+// شروع
+initServices();
+render();
+
+// Service Worker
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('sw.js');
+}
+</script>
+</body>
+</html>
