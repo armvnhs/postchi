@@ -1,7 +1,7 @@
 {
-  "name": "پست‌چی - پیگیری مرسوله",
-  "short_name": "پست‌چی",
-  "description": "پیگیری آسان مرسوله‌های پستی ایران",
+  "name": "PostChi - Easy Tracking for Iran Post",
+  "short_name": "PostChi",
+  "description": "Easy Tracking for Iran Post",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
