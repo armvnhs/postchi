@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="پیگیری آسان مرسوله‌های پستی ایران">
-  <meta name="theme-color" content="#6366f1">
+  <meta name="theme-color" content="#0f0f0f">
   <title>پست‌چی - پیگیری مرسوله</title>
   <link rel="manifest" href="./manifest.json">
   <link rel="icon" href="./icon.png">
@@ -17,183 +17,192 @@
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    :root {
+      --bg: #0f0f0f;
+      --surface: #1a1a1a;
+      --surface-2: #242424;
+      --border: #2e2e2e;
+      --yellow: #facc15;
+      --yellow-dark: #eab308;
+      --text: #f5f5f5;
+      --text-muted: #a3a3a3;
+      --danger: #f87171;
     }
 
     body {
       font-family: 'Estedad', sans-serif;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      color: #1e293b;
+      background: var(--bg);
+      color: var(--text);
       line-height: 1.6;
       min-height: 100vh;
-      padding: 0;
     }
 
     .app-container {
       max-width: 480px;
       margin: 0 auto;
       min-height: 100vh;
-      background: #f8fafc;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
     }
 
     .app-header {
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      color: white;
-      padding: 24px 20px;
-      text-align: center;
-      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+      padding: 28px 20px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
 
     .app-title {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
       font-weight: 700;
-      margin-bottom: 6px;
       display: flex;
       align-items: center;
-      justify-content: center;
       gap: 10px;
     }
 
-    .app-title .material-icons-round {
-      font-size: 32px;
+    .app-title .icon-badge {
+      width: 44px;
+      height: 44px;
+      background: var(--yellow);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .app-subtitle {
-      font-size: 0.9rem;
-      font-weight: 400;
-      opacity: 0.9;
+    .app-title .icon-badge .material-icons-round {
+      font-size: 26px;
+      color: #0f0f0f;
     }
 
-    .stats-bar {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 1px;
-      background: #e2e8f0;
-      margin-bottom: 0;
-    }
-
-    .stat-item {
-      background: white;
-      padding: 16px;
+    .total-badge {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 8px 16px;
       text-align: center;
     }
 
-    .stat-value {
-      font-size: 1.5rem;
+    .total-badge .stat-value {
+      font-size: 1.2rem;
       font-weight: 700;
-      color: #6366f1;
+      color: var(--yellow);
       display: block;
-      margin-bottom: 2px;
+      line-height: 1.2;
     }
 
-    .stat-label {
-      font-size: 0.75rem;
-      color: #64748b;
+    .total-badge .stat-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
       font-weight: 500;
     }
 
     .content-section {
-      padding: 20px;
+      padding: 0 20px 40px;
     }
 
     .add-card {
-      background: white;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 20px;
-      padding: 24px;
-      margin-bottom: 24px;
-      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+      padding: 22px;
+      margin-bottom: 28px;
     }
 
     .section-title {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: #1e293b;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .section-title .material-icons-round {
-      font-size: 24px;
-      color: #6366f1;
+      font-size: 22px;
+      color: var(--yellow);
     }
 
     .form-group {
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     label {
       display: block;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
-      color: #475569;
+      color: var(--text-muted);
       margin-bottom: 8px;
     }
 
     input, select {
       width: 100%;
-      padding: 14px 16px;
-      border: 2px solid #e2e8f0;
+      padding: 13px 16px;
+      border: 1.5px solid var(--border);
       border-radius: 12px;
       font-family: 'Estedad', sans-serif;
       font-size: 0.95rem;
-      background: #f8fafc;
-      transition: all 0.3s;
+      background: var(--surface-2);
+      color: var(--text);
+      transition: border-color 0.2s;
       font-weight: 500;
+    }
+
+    /* فلش سفارشی برای select — رفع مشکل فلش پیش‌فرض */
+    select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23a3a3a3'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: left 14px center;
+      background-size: 20px;
+      padding-left: 44px;
+      cursor: pointer;
+    }
+
+    select option {
+      background: var(--surface-2);
+      color: var(--text);
+    }
+
+    input::placeholder {
+      color: #6b6b6b;
     }
 
     input:focus, select:focus {
       outline: none;
-      border-color: #6366f1;
-      background: white;
-      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+      border-color: var(--yellow);
     }
 
     .btn-add {
       width: 100%;
-      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-      color: white;
+      background: var(--yellow);
+      color: #0f0f0f;
       border: none;
-      padding: 16px;
+      padding: 15px;
       border-radius: 12px;
       font-family: 'Estedad', sans-serif;
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 700;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
-      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
-      transition: all 0.3s;
+      gap: 6px;
+      transition: all 0.2s;
     }
 
-    .btn-add:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
-    }
-
-    .btn-add:active {
-      transform: translateY(0);
-    }
-
-    .parcels-section {
-      margin-bottom: 20px;
-    }
+    .btn-add:hover { background: var(--yellow-dark); }
+    .btn-add:active { transform: scale(0.98); }
 
     .parcel-card {
-      background: white;
+      background: var(--surface);
+      border: 1px solid var(--border);
       border-radius: 16px;
-      padding: 20px;
+      padding: 18px;
       margin-bottom: 12px;
-      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
-      transition: all 0.3s;
-    }
-
-    .parcel-card:hover {
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-      transform: translateY(-2px);
     }
 
     .parcel-header {
@@ -201,28 +210,29 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
+      gap: 8px;
     }
 
     .parcel-title {
-      font-size: 1.05rem;
+      font-size: 1rem;
       font-weight: 700;
-      color: #1e293b;
     }
 
     .parcel-company {
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       font-weight: 600;
-      color: #6366f1;
-      background: #eef2ff;
+      color: var(--yellow);
+      background: rgba(250, 204, 21, 0.1);
       padding: 4px 12px;
       border-radius: 20px;
+      white-space: nowrap;
     }
 
     .parcel-code {
       font-size: 0.9rem;
       font-weight: 600;
-      color: #64748b;
-      background: #f1f5f9;
+      color: var(--text-muted);
+      background: var(--surface-2);
       padding: 10px 14px;
       border-radius: 10px;
       margin-bottom: 14px;
@@ -230,6 +240,7 @@
       letter-spacing: 0.5px;
       display: block;
       text-align: center;
+      direction: ltr;
     }
 
     .parcel-actions {
@@ -243,62 +254,53 @@
       border: none;
       border-radius: 10px;
       font-family: 'Estedad', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       font-weight: 600;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 4px;
-      transition: all 0.3s;
+      transition: all 0.2s;
     }
 
     .btn-track {
-      background: #6366f1;
-      color: white;
+      background: var(--yellow);
+      color: #0f0f0f;
     }
 
-    .btn-track:hover {
-      background: #4f46e5;
-      transform: translateY(-1px);
-    }
+    .btn-track:hover { background: var(--yellow-dark); }
 
     .btn-copy {
-      background: #f1f5f9;
-      color: #475569;
+      background: var(--surface-2);
+      color: var(--text-muted);
     }
 
-    .btn-copy:hover {
-      background: #e2e8f0;
-    }
+    .btn-copy:hover { background: var(--border); }
 
     .btn-delete {
-      background: #fef2f2;
-      color: #ef4444;
+      background: rgba(248, 113, 113, 0.1);
+      color: var(--danger);
     }
 
-    .btn-delete:hover {
-      background: #fee2e2;
-    }
+    .btn-delete:hover { background: rgba(248, 113, 113, 0.2); }
 
-    .material-icons-round {
-      font-size: 18px;
-    }
+    .material-icons-round { font-size: 18px; }
 
     .empty-state {
       text-align: center;
       padding: 60px 20px;
-      color: #94a3b8;
+      color: #525252;
     }
 
     .empty-state .material-icons-round {
-      font-size: 80px;
-      opacity: 0.3;
-      margin-bottom: 16px;
+      font-size: 72px;
+      opacity: 0.4;
+      margin-bottom: 12px;
     }
 
     .empty-state-text {
-      font-size: 1rem;
+      font-size: 0.95rem;
       font-weight: 500;
     }
 
@@ -307,30 +309,24 @@
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%) translateY(100px);
-      background: #1e293b;
-      color: white;
-      padding: 14px 24px;
+      background: var(--yellow);
+      color: #0f0f0f;
+      padding: 13px 22px;
       border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-      font-weight: 600;
-      font-size: 0.9rem;
+      font-weight: 700;
+      font-size: 0.85rem;
       opacity: 0;
       transition: all 0.3s;
       z-index: 1000;
       display: flex;
       align-items: center;
       gap: 8px;
+      white-space: nowrap;
     }
 
     .toast.show {
       opacity: 1;
       transform: translateX(-50%) translateY(0);
-    }
-
-    @media (max-width: 480px) {
-      .app-container {
-        box-shadow: none;
-      }
     }
   </style>
 </head>
@@ -338,24 +334,12 @@
   <div class="app-container">
     <div class="app-header">
       <div class="app-title">
-        <span class="material-icons-round">local_shipping</span>
+        <span class="icon-badge"><span class="material-icons-round">local_shipping</span></span>
         پست‌چی
       </div>
-      <div class="app-subtitle">پیگیری هوشمند مرسولات پستی</div>
-    </div>
-
-    <div class="stats-bar">
-      <div class="stat-item">
+      <div class="total-badge">
         <span class="stat-value" id="totalCount">0</span>
-        <span class="stat-label">کل</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" id="todayCount">0</span>
-        <span class="stat-label">امروز</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-value" id="weekCount">0</span>
-        <span class="stat-label">این هفته</span>
+        <span class="stat-label">مرسوله</span>
       </div>
     </div>
 
@@ -368,7 +352,7 @@
         <form id="parcelForm">
           <div class="form-group">
             <label for="parcelTitle">عنوان مرسوله</label>
-            <input type="text" id="parcelTitle" placeholder="مثلاً: کتاب از آمازون" required>
+            <input type="text" id="parcelTitle" placeholder="مثلاً: کتاب از دیجی‌کالا" required>
           </div>
           <div class="form-group">
             <label for="trackingCode">کد رهگیری</label>
@@ -380,9 +364,12 @@
               <option value="">انتخاب کنید</option>
               <option value="post">پست ایران</option>
               <option value="tipax">تیپاکس</option>
+              <option value="postex">پستکس</option>
               <option value="chapar">چاپار</option>
+              <option value="alopeyk">الوپیک</option>
+              <option value="miare">میاره</option>
+              <option value="snappbox">اسنپ باکس</option>
               <option value="mahex">ماهکس</option>
-              <option value="postbar">پست بار</option>
             </select>
           </div>
           <button type="submit" class="btn-add">
@@ -400,135 +387,4 @@
         <div id="parcelsList"></div>
       </div>
     </div>
-  </div>
-
-  <div class="toast" id="toast">
-    <span class="material-icons-round">check_circle</span>
-    <span id="toastMessage"></span>
-  </div>
-
-  <script>
-    const STORAGE_KEY = 'postchi_parcels';
-    const companies = {
-      post: { name: 'پست ایران', url: 'https://tracking.post.ir/search.aspx?id=' },
-      tipax: { name: 'تیپاکس', url: 'https://tipaxco.com/tracking/?tc=' },
-      chapar: { name: 'چاپار', url: 'https://chapar.post.ir/tracking/?id=' },
-      mahex: { name: 'ماهکس', url: 'https://mahex.net/tracking/?code=' },
-      postbar: { name: 'پست بار', url: 'https://tracking.postbar.ir/?code=' }
-    };
-
-    function loadParcels() {
-      const data = localStorage.getItem(STORAGE_KEY);
-      return data ? JSON.parse(data) : [];
-    }
-
-    function saveParcels(parcels) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(parcels));
-      updateStats();
-      renderParcels();
-    }
-
-    function updateStats() {
-      const parcels = loadParcels();
-      const now = new Date();
-      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
-      const weekAgo = today - (7 * 24 * 60 * 60 * 1000);
-
-      document.getElementById('totalCount').textContent = parcels.length;
-      document.getElementById('todayCount').textContent = parcels.filter(p => p.timestamp >= today).length;
-      document.getElementById('weekCount').textContent = parcels.filter(p => p.timestamp >= weekAgo).length;
-    }
-
-    function renderParcels() {
-      const parcels = loadParcels();
-      const container = document.getElementById('parcelsList');
-      
-      if (parcels.length === 0) {
-        container.innerHTML = `
-          <div class="empty-state">
-            <div class="material-icons-round">inventory_2</div>
-            <div class="empty-state-text">هنوز مرسوله‌ای اضافه نکرده‌اید</div>
-          </div>
-        `;
-        return;
-      }
-
-      container.innerHTML = parcels.map((parcel, index) => `
-        <div class="parcel-card">
-          <div class="parcel-header">
-            <div class="parcel-title">${parcel.title}</div>
-            <div class="parcel-company">${companies[parcel.company].name}</div>
-          </div>
-          <div class="parcel-code">${parcel.code}</div>
-          <div class="parcel-actions">
-            <button class="btn-action btn-track" onclick="trackParcel('${parcel.company}', '${parcel.code}')">
-              <span class="material-icons-round">search</span>
-              پیگیری
-            </button>
-            <button class="btn-action btn-copy" onclick="copyCode('${parcel.code}')">
-              <span class="material-icons-round">content_copy</span>
-              کپی
-            </button>
-            <button class="btn-action btn-delete" onclick="deleteParcel(${index})">
-              <span class="material-icons-round">delete</span>
-              حذف
-            </button>
-          </div>
-        </div>
-      `).join('');
-    }
-
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      document.getElementById('toastMessage').textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => toast.classList.remove('show'), 3000);
-    }
-
-    function trackParcel(company, code) {
-      const url = companies[company].url + code;
-      window.open(url, '_blank');
-    }
-
-    function copyCode(code) {
-      navigator.clipboard.writeText(code).then(() => {
-        showToast('کد رهگیری کپی شد');
-      });
-    }
-
-    function deleteParcel(index) {
-      const parcels = loadParcels();
-      parcels.splice(index, 1);
-      saveParcels(parcels);
-      showToast('مرسوله حذف شد');
-    }
-
-    document.getElementById('parcelForm').addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const title = document.getElementById('parcelTitle').value;
-      const code = document.getElementById('trackingCode').value;
-      const company = document.getElementById('company').value;
-      
-      const parcels = loadParcels();
-      parcels.unshift({
-        title,
-        code,
-        company,
-        timestamp: Date.now()
-      });
-      
-      saveParcels(parcels);
-      showToast('مرسوله با موفقیت اضافه شد');
-      e.target.reset();
-    });
-
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('./sw.js');
-    }
-
-    updateStats();
-    renderParcels();
-  </script>
-</body>
-</html>
+  </
