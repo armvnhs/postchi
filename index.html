@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#0ea5e9">
+<meta name="theme-color" content="#1976d2">
 <title>پست‌چی - پیگیری مرسوله</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Estedad:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <style>
   * {
     margin: 0; padding: 0; box-sizing: border-box;
@@ -17,118 +18,136 @@
   }
   
   body {
-    background: #f8fafc;
+    background: #fafafa;
     min-height: 100vh;
     padding-bottom: 40px;
   }
 
   /* Header */
   header {
-    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
-    padding: 24px 20px;
-    color: #fff;
-    box-shadow: 0 2px 8px rgba(14,165,233,.2);
+    background: #fff;
+    padding: 20px;
+    border-bottom: 1px solid #e0e0e0;
   }
   
   .header-content {
-    max-width: 600px;
+    max-width: 640px;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  
+  .header-icon {
+    font-size: 32px;
+    color: #1976d2;
   }
   
   header h1 {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 4px;
-  }
-  
-  header p {
-    font-size: .9rem;
-    opacity: .95;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: #212121;
   }
 
   /* Container */
   .container {
-    max-width: 600px;
-    margin: -20px auto 0;
-    padding: 0 16px;
+    max-width: 640px;
+    margin: 24px auto;
+    padding: 0 20px;
+  }
+
+  /* Stats */
+  .stats {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .stat {
+    flex: 1;
+    background: #fff;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #e0e0e0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .stat-icon {
+    font-size: 28px;
+    color: #757575;
+  }
+
+  .stat-content {
+    flex: 1;
+  }
+
+  .stat-number {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #212121;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: .8rem;
+    color: #757575;
+    margin-top: 4px;
   }
 
   /* Card */
   .card {
     background: #fff;
-    border-radius: 16px;
+    border-radius: 8px;
     padding: 24px;
     margin-bottom: 16px;
-    box-shadow: 0 1px 3px rgba(0,0,0,.08);
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e0e0e0;
   }
 
   .card-title {
     font-size: 1rem;
-    font-weight: 700;
-    color: #0f172a;
+    font-weight: 500;
+    color: #212121;
     margin-bottom: 20px;
-    padding-bottom: 12px;
-    border-bottom: 2px solid #f1f5f9;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  /* Stats */
-  .stats {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .stat-box {
-    background: #fff;
-    border: 2px solid #e0f2fe;
-    padding: 20px;
-    border-radius: 12px;
-    text-align: center;
-  }
-
-  .stat-number {
-    font-size: 2rem;
-    font-weight: 700;
-    color: #0ea5e9;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: .85rem;
-    color: #64748b;
-    margin-top: 8px;
+  .card-title .material-icons {
+    font-size: 20px;
+    color: #757575;
   }
 
   /* Form */
   .form-group {
-    margin-bottom: 16px;
+    margin-bottom: 20px;
   }
   
   label {
     display: block;
-    font-size: .9rem;
-    font-weight: 600;
-    color: #334155;
+    font-size: .85rem;
+    font-weight: 400;
+    color: #616161;
     margin-bottom: 8px;
   }
 
   input, select {
     width: 100%;
-    padding: 12px 16px;
-    border: 2px solid #e2e8f0;
-    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1px solid #e0e0e0;
+    border-radius: 4px;
     font-size: .95rem;
     transition: all .2s;
     background: #fff;
     font-family: 'Estedad', sans-serif;
+    color: #212121;
   }
   
   input:focus, select:focus {
     outline: none;
-    border-color: #0ea5e9;
-    background: #f8fafc;
+    border-color: #1976d2;
   }
 
   select {
@@ -138,429 +157,75 @@
   /* Button */
   .btn {
     width: 100%;
-    padding: 14px;
+    padding: 12px;
     border: none;
-    border-radius: 10px;
-    font-size: .95rem;
-    font-weight: 600;
+    border-radius: 4px;
+    font-size: .9rem;
+    font-weight: 500;
     cursor: pointer;
     transition: all .2s;
     font-family: 'Estedad', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
   }
 
   .btn-primary {
-    background: #0ea5e9;
+    background: #1976d2;
     color: #fff;
   }
 
   .btn-primary:hover {
-    background: #0284c7;
+    background: #1565c0;
   }
 
   .btn-primary:active {
     transform: scale(.98);
   }
 
+  .btn .material-icons {
+    font-size: 18px;
+  }
+
   /* Items List */
   .items-container {
-    max-height: 500px;
-    overflow-y: auto;
-    margin: -8px;
-    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
   .item {
-    background: #f8fafc;
-    border-radius: 12px;
+    background: #fafafa;
+    border-radius: 4px;
     padding: 16px;
-    margin-bottom: 12px;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #e0e0e0;
     transition: all .2s;
   }
 
   .item:hover {
     background: #fff;
-    border-color: #0ea5e9;
-    box-shadow: 0 2px 8px rgba(14,165,233,.1);
+    box-shadow: 0 1px 4px rgba(0,0,0,.08);
   }
 
   .item-header {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
+    align-items: flex-start;
     gap: 12px;
+    margin-bottom: 12px;
+  }
+
+  .item-icon {
+    color: #757575;
+    font-size: 20px;
+    margin-top: 2px;
+  }
+
+  .item-content {
+    flex: 1;
+    min-width: 0;
   }
 
   .item-title {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #0f172a;
-    flex: 1;
-  }
-
-  .item-badge {
-    background: #e0f2fe;
-    color: #0369a1;
-    padding: 4px 10px;
-    border-radius: 6px;
-    font-size: .75rem;
-    font-weight: 600;
-    white-space: nowrap;
-  }
-
-  .item-code {
-    font-family: 'Courier New', monospace;
-    font-size: .85rem;
-    color: #64748b;
-    direction: ltr;
-    text-align: right;
-    margin-bottom: 12px;
-    background: #fff;
-    padding: 10px 12px;
-    border-radius: 8px;
-    border: 1px solid #e2e8f0;
-  }
-
-  .item-actions {
-    display: flex;
-    gap: 8px;
-  }
-
-  .btn-sm {
-    flex: 1;
-    padding: 10px;
-    border: none;
-    border-radius: 8px;
-    font-size: .85rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all .2s;
-    font-family: 'Estedad', sans-serif;
-  }
-
-  .btn-track {
-    background: #22c55e;
-    color: #fff;
-  }
-
-  .btn-track:active {
-    background: #16a34a;
-  }
-
-  .btn-copy {
-    background: #3b82f6;
-    color: #fff;
-  }
-
-  .btn-copy:active {
-    background: #2563eb;
-  }
-
-  .btn-del {
-    background: #ef4444;
-    color: #fff;
-    flex: 0 0 auto;
-    padding: 10px 14px;
-  }
-
-  .btn-del:active {
-    background: #dc2626;
-  }
-
-  .empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: #94a3b8;
-  }
-
-  .empty-icon {
-    font-size: 4rem;
-    margin-bottom: 16px;
-    opacity: .6;
-  }
-
-  .empty-text {
-    font-size: 1rem;
+    font-size: .95rem;
     font-weight: 500;
-  }
-
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 30px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: #1e293b;
-    color: #fff;
-    padding: 14px 24px;
-    border-radius: 10px;
-    font-size: .9rem;
-    font-weight: 500;
-    opacity: 0;
-    transition: all .3s;
-    z-index: 1000;
-    box-shadow: 0 4px 12px rgba(0,0,0,.2);
-  }
-
-  .toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-
-  /* Scrollbar */
-  .items-container::-webkit-scrollbar {
-    width: 8px;
-  }
-
-  .items-container::-webkit-scrollbar-track {
-    background: #f1f5f9;
-    border-radius: 10px;
-  }
-
-  .items-container::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 10px;
-  }
-
-  .items-container::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
-  }
-
-  /* Responsive */
-  @media (max-width: 480px) {
-    .container {
-      padding: 0 12px;
-    }
-    
-    .card {
-      padding: 20px;
-    }
-    
-    header h1 {
-      font-size: 1.3rem;
-    }
-  }
-</style>
-</head>
-<body>
-
-<header>
-  <div class="header-content">
-    <h1>📦 پست‌چی</h1>
-    <p>پیگیری آسان مرسوله‌های پستی</p>
-  </div>
-</header>
-
-<div class="container">
-  <!-- آمار -->
-  <div class="stats">
-    <div class="stat-box">
-      <div class="stat-number" id="totalCount">0</div>
-      <div class="stat-label">کل مرسوله‌ها</div>
-    </div>
-    <div class="stat-box">
-      <div class="stat-number" id="servicesCount">0</div>
-      <div class="stat-label">شرکت فعال</div>
-    </div>
-  </div>
-
-  <!-- فرم افزودن -->
-  <div class="card">
-    <div class="card-title">افزودن مرسوله جدید</div>
-    
-    <div class="form-group">
-      <label>عنوان مرسوله</label>
-      <input type="text" id="title" placeholder="مثلاً: خرید دیجی‌کالا">
-    </div>
-
-    <div class="form-group">
-      <label>کد پیگیری</label>
-      <input type="text" id="code" placeholder="کد رهگیری را وارد کنید" dir="ltr">
-    </div>
-
-    <div class="form-group">
-      <label>شرکت پستی</label>
-      <select id="service"></select>
-    </div>
-
-    <button class="btn btn-primary" onclick="addItem()">ذخیره مرسوله</button>
-  </div>
-
-  <!-- لیست مرسوله‌ها -->
-  <div class="card">
-    <div class="card-title">مرسوله‌های من</div>
-    <div class="items-container" id="list"></div>
-  </div>
-</div>
-
-<!-- Toast -->
-<div class="toast" id="toast"></div>
-
-<script>
-// تمام شرکت‌های پستی ایران
-const SERVICES = {
-  post: {
-    name: 'پست ایران',
-    url: code => `https://tracking.post.ir/?id=${code}`
-  },
-  tipax: {
-    name: 'تیپاکس',
-    url: code => `https://tipaxco.com/tracking?code=${code}`
-  },
-  postex: {
-    name: 'پستکس',
-    url: code => `https://postex.ir/tracking?code=${code}`
-  },
-  chapar: {
-    name: 'چاپار',
-    url: code => `https://chapar.post.ir/track/${code}`
-  },
-  alopeyk: {
-    name: 'الوپیک',
-    url: code => `https://alopeyk.com/tracking/${code}`
-  },
-  miare: {
-    name: 'میاره',
-    url: code => `https://miare.ir/tracking?code=${code}`
-  },
-  snapp: {
-    name: 'اسنپ باکس',
-    url: code => `https://snapp.market/tracking/${code}`
-  },
-  mahex: {
-    name: 'ماهکس',
-    url: code => `https://mahex.com/track?code=${code}`
-  }
-};
-
-// پر کردن select
-function initServices() {
-  const select = document.getElementById('service');
-  select.innerHTML = Object.keys(SERVICES)
-    .map(key => `<option value="${key}">${SERVICES[key].name}</option>`)
-    .join('');
-}
-
-// Toast
-function showToast(msg) {
-  const toast = document.getElementById('toast');
-  toast.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2000);
-}
-
-// localStorage
-function getItems() {
-  return JSON.parse(localStorage.getItem('postchi_parcels') || '[]');
-}
-
-function saveItems(items) {
-  localStorage.setItem('postchi_parcels', JSON.stringify(items));
-}
-
-// آمار
-function updateStats() {
-  const items = getItems();
-  document.getElementById('totalCount').textContent = items.length;
-  
-  const uniqueServices = new Set(items.map(i => i.service));
-  document.getElementById('servicesCount').textContent = uniqueServices.size;
-}
-
-// افزودن
-function addItem() {
-  const title = document.getElementById('title').value.trim();
-  const code = document.getElementById('code').value.trim();
-  const service = document.getElementById('service').value;
-
-  if (!code) {
-    showToast('کد پیگیری را وارد کنید');
-    return;
-  }
-
-  const items = getItems();
-  items.unshift({
-    id: Date.now(),
-    title: title || 'بدون عنوان',
-    code,
-    service,
-    createdAt: new Date().toLocaleDateString('fa-IR')
-  });
-  saveItems(items);
-
-  document.getElementById('title').value = '';
-  document.getElementById('code').value = '';
-  
-  showToast('مرسوله ذخیره شد');
-  render();
-}
-
-// حذف
-function delItem(id) {
-  if (!confirm('این مرسوله حذف شود؟')) return;
-  saveItems(getItems().filter(i => i.id !== id));
-  showToast('مرسوله حذف شد');
-  render();
-}
-
-// پیگیری
-function track(id) {
-  const item = getItems().find(i => i.id === id);
-  if (item) {
-    window.open(SERVICES[item.service].url(item.code), '_blank');
-    showToast('در حال باز کردن...');
-  }
-}
-
-// کپی
-function copyCode(code) {
-  navigator.clipboard.writeText(code).then(() => {
-    showToast('کد کپی شد');
-  });
-}
-
-// نمایش
-function render() {
-  const items = getItems();
-  const list = document.getElementById('list');
-  
-  updateStats();
-
-  if (!items.length) {
-    list.innerHTML = `
-      <div class="empty">
-        <div class="empty-icon">📭</div>
-        <div class="empty-text">هنوز مرسوله‌ای ثبت نشده</div>
-      </div>
-    `;
-    return;
-  }
-
-  list.innerHTML = items.map(i => `
-    <div class="item">
-      <div class="item-header">
-        <div class="item-title">${i.title}</div>
-        <div class="item-badge">${SERVICES[i.service].name}</div>
-      </div>
-      <div class="item-code">${i.code}</div>
-      <div class="item-actions">
-        <button class="btn-sm btn-track" onclick="track(${i.id})">پیگیری</button>
-        <button class="btn-sm btn-copy" onclick="copyCode('${i.code}')">کپی</button>
-        <button class="btn-sm btn-del" onclick="delItem(${i.id})">حذف</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-// شروع
-initServices();
-render();
-
-// Service Worker
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
-</script>
-</body>
-</html>
