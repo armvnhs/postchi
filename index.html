@@ -1,653 +1,534 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#1976d2">
-<title>پست‌چی - پیگیری مرسوله</title>
-<link rel="manifest" href="manifest.json">
-<link rel="icon" href="icon.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Estedad:wght@300;400;500;600&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<style>
-  * {
-    margin: 0; padding: 0; box-sizing: border-box;
-    font-family: 'Estedad', sans-serif;
-  }
-  
-  body {
-    background: #fafafa;
-    min-height: 100vh;
-    padding-bottom: 40px;
-  }
-
-  /* Header */
-  header {
-    background: #fff;
-    padding: 20px;
-    border-bottom: 1px solid #e0e0e0;
-  }
-  
-  .header-content {
-    max-width: 640px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  
-  .header-icon {
-    font-size: 32px;
-    color: #1976d2;
-  }
-  
-  header h1 {
-    font-size: 1.4rem;
-    font-weight: 500;
-    color: #212121;
-  }
-
-  /* Container */
-  .container {
-    max-width: 640px;
-    margin: 24px auto;
-    padding: 0 20px;
-  }
-
-  /* Stats */
-  .stats {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .stat {
-    flex: 1;
-    background: #fff;
-    padding: 16px;
-    border-radius: 8px;
-    border: 1px solid #e0e0e0;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .stat-icon {
-    font-size: 28px;
-    color: #757575;
-  }
-
-  .stat-content {
-    flex: 1;
-  }
-
-  .stat-number {
-    font-size: 1.5rem;
-    font-weight: 500;
-    color: #212121;
-    line-height: 1;
-  }
-
-  .stat-label {
-    font-size: .8rem;
-    color: #757575;
-    margin-top: 4px;
-  }
-
-  /* Card */
-  .card {
-    background: #fff;
-    border-radius: 8px;
-    padding: 24px;
-    margin-bottom: 16px;
-    border: 1px solid #e0e0e0;
-  }
-
-  .card-title {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #212121;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .card-title .material-icons {
-    font-size: 20px;
-    color: #757575;
-  }
-
-  /* Form */
-  .form-group {
-    margin-bottom: 20px;
-  }
-  
-  label {
-    display: block;
-    font-size: .85rem;
-    font-weight: 400;
-    color: #616161;
-    margin-bottom: 8px;
-  }
-
-  input, select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #e0e0e0;
-    border-radius: 4px;
-    font-size: .95rem;
-    transition: all .2s;
-    background: #fff;
-    font-family: 'Estedad', sans-serif;
-    color: #212121;
-  }
-  
-  input:focus, select:focus {
-    outline: none;
-    border-color: #1976d2;
-  }
-
-  select {
-    cursor: pointer;
-  }
-
-  /* Button */
-  .btn {
-    width: 100%;
-    padding: 12px;
-    border: none;
-    border-radius: 4px;
-    font-size: .9rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .2s;
-    font-family: 'Estedad', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-  }
-
-  .btn-primary {
-    background: #1976d2;
-    color: #fff;
-  }
-
-  .btn-primary:hover {
-    background: #1565c0;
-  }
-
-  .btn-primary:active {
-    transform: scale(.98);
-  }
-
-  .btn .material-icons {
-    font-size: 18px;
-  }
-
-  /* Items List */
-  .items-container {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-
-  .item {
-    background: #fafafa;
-    border-radius: 4px;
-    padding: 16px;
-    border: 1px solid #e0e0e0;
-    transition: all .2s;
-  }
-
-  .item:hover {
-    background: #fff;
-    box-shadow: 0 1px 4px rgba(0,0,0,.08);
-  }
-
-  .item-header {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    margin-bottom: 12px;
-  }
-
-  .item-icon {
-    color: #757575;
-    font-size: 20px;
-    margin-top: 2px;
-  }
-
-  .item-content {
-    flex: 1;
-    min-width: 0;
-  }
-
-  .item-title {
-    font-size: .95rem;
-    font-weight: 500;
-    color: #212121;
-    margin-bottom: 4px;
-  }
-
-  .item-service {
-    font-size: .8rem;
-    color: #757575;
-  }
-
-  .item-code {
-    font-family: 'Courier New', monospace;
-    font-size: .85rem;
-    color: #424242;
-    direction: ltr;
-    text-align: right;
-    margin-bottom: 12px;
-    background: #fff;
-    padding: 10px;
-    border-radius: 4px;
-    border: 1px solid #e0e0e0;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .item-code .material-icons {
-    font-size: 16px;
-    color: #9e9e9e;
-  }
-
-  .item-actions {
-    display: flex;
-    gap: 8px;
-  }
-
-  .btn-sm {
-    flex: 1;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 4px;
-    font-size: .8rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all .2s;
-    font-family: 'Estedad', sans-serif;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-  }
-
-  .btn-sm .material-icons {
-    font-size: 16px;
-  }
-
-  .btn-track {
-    background: #fff;
-    color: #1976d2;
-    border: 1px solid #1976d2;
-  }
-
-  .btn-track:hover {
-    background: #1976d2;
-    color: #fff;
-  }
-
-  .btn-copy {
-    background: #fff;
-    color: #757575;
-    border: 1px solid #e0e0e0;
-  }
-
-  .btn-copy:hover {
-    background: #f5f5f5;
-  }
-
-  .btn-del {
-    background: #fff;
-    color: #d32f2f;
-    border: 1px solid #e0e0e0;
-    flex: 0 0 auto;
-    padding: 8px;
-  }
-
-  .btn-del:hover {
-    background: #ffebee;
-  }
-
-  .empty {
-    text-align: center;
-    padding: 60px 20px;
-    color: #9e9e9e;
-  }
-
-  .empty-icon {
-    font-size: 64px;
-    color: #e0e0e0;
-    margin-bottom: 16px;
-  }
-
-  .empty-text {
-    font-size: .95rem;
-    font-weight: 400;
-  }
-
-  /* Toast */
-  .toast {
-    position: fixed;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100px);
-    background: #323232;
-    color: #fff;
-    padding: 12px 24px;
-    border-radius: 4px;
-    font-size: .9rem;
-    font-weight: 400;
-    opacity: 0;
-    transition: all .3s;
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 3px 8px rgba(0,0,0,.3);
-  }
-
-  .toast .material-icons {
-    font-size: 18px;
-  }
-
-  .toast.show {
-    transform: translateX(-50%) translateY(0);
-    opacity: 1;
-  }
-
-  /* Responsive */
-  @media (max-width: 480px) {
-    .container {
-      padding: 0 16px;
-      margin: 16px auto;
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="پیگیری آسان مرسوله‌های پستی ایران">
+  <meta name="theme-color" content="#6366f1">
+  <title>پست‌چی - پیگیری مرسوله</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Estedad:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
-    
-    .card {
+
+    body {
+      font-family: 'Estedad', sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #1e293b;
+      line-height: 1.6;
+      min-height: 100vh;
+      padding: 0;
+    }
+
+    .app-container {
+      max-width: 480px;
+      margin: 0 auto;
+      min-height: 100vh;
+      background: #f8fafc;
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.3);
+    }
+
+    .app-header {
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      padding: 24px 20px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    }
+
+    .app-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .app-title .material-icons-round {
+      font-size: 32px;
+    }
+
+    .app-subtitle {
+      font-size: 0.9rem;
+      font-weight: 400;
+      opacity: 0.9;
+    }
+
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #e2e8f0;
+      margin-bottom: 0;
+    }
+
+    .stat-item {
+      background: white;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #6366f1;
+      display: block;
+      margin-bottom: 2px;
+    }
+
+    .stat-label {
+      font-size: 0.75rem;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .content-section {
       padding: 20px;
     }
 
-    .stats {
-      flex-direction: column;
+    .add-card {
+      background: white;
+      border-radius: 20px;
+      padding: 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #1e293b;
+      margin-bottom: 20px;
+      display: flex;
+      align-items: center;
       gap: 8px;
     }
-    
-    header h1 {
-      font-size: 1.2rem;
+
+    .section-title .material-icons-round {
+      font-size: 24px;
+      color: #6366f1;
     }
 
-    .item-actions {
-      flex-wrap: wrap;
+    .form-group {
+      margin-bottom: 18px;
     }
 
-    .btn-sm {
-      min-width: calc(50% - 4px);
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 8px;
     }
-  }
-</style>
+
+    input, select {
+      width: 100%;
+      padding: 14px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 12px;
+      font-family: 'Estedad', sans-serif;
+      font-size: 0.95rem;
+      background: #f8fafc;
+      transition: all 0.3s;
+      font-weight: 500;
+    }
+
+    input:focus, select:focus {
+      outline: none;
+      border-color: #6366f1;
+      background: white;
+      box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+    }
+
+    .btn-add {
+      width: 100%;
+      background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+      color: white;
+      border: none;
+      padding: 16px;
+      border-radius: 12px;
+      font-family: 'Estedad', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      box-shadow: 0 4px 15px rgba(99, 102, 241, 0.4);
+      transition: all 0.3s;
+    }
+
+    .btn-add:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(99, 102, 241, 0.5);
+    }
+
+    .btn-add:active {
+      transform: translateY(0);
+    }
+
+    .parcels-section {
+      margin-bottom: 20px;
+    }
+
+    .parcel-card {
+      background: white;
+      border-radius: 16px;
+      padding: 20px;
+      margin-bottom: 12px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+      transition: all 0.3s;
+    }
+
+    .parcel-card:hover {
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .parcel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .parcel-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #1e293b;
+    }
+
+    .parcel-company {
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #6366f1;
+      background: #eef2ff;
+      padding: 4px 12px;
+      border-radius: 20px;
+    }
+
+    .parcel-code {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: #64748b;
+      background: #f1f5f9;
+      padding: 10px 14px;
+      border-radius: 10px;
+      margin-bottom: 14px;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.5px;
+      display: block;
+      text-align: center;
+    }
+
+    .parcel-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+    }
+
+    .btn-action {
+      padding: 10px;
+      border: none;
+      border-radius: 10px;
+      font-family: 'Estedad', sans-serif;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      transition: all 0.3s;
+    }
+
+    .btn-track {
+      background: #6366f1;
+      color: white;
+    }
+
+    .btn-track:hover {
+      background: #4f46e5;
+      transform: translateY(-1px);
+    }
+
+    .btn-copy {
+      background: #f1f5f9;
+      color: #475569;
+    }
+
+    .btn-copy:hover {
+      background: #e2e8f0;
+    }
+
+    .btn-delete {
+      background: #fef2f2;
+      color: #ef4444;
+    }
+
+    .btn-delete:hover {
+      background: #fee2e2;
+    }
+
+    .material-icons-round {
+      font-size: 18px;
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #94a3b8;
+    }
+
+    .empty-state .material-icons-round {
+      font-size: 80px;
+      opacity: 0.3;
+      margin-bottom: 16px;
+    }
+
+    .empty-state-text {
+      font-size: 1rem;
+      font-weight: 500;
+    }
+
+    .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%) translateY(100px);
+      background: #1e293b;
+      color: white;
+      padding: 14px 24px;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      font-weight: 600;
+      font-size: 0.9rem;
+      opacity: 0;
+      transition: all 0.3s;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      transform: translateX(-50%) translateY(0);
+    }
+
+    @media (max-width: 480px) {
+      .app-container {
+        box-shadow: none;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div class="app-container">
+    <div class="app-header">
+      <div class="app-title">
+        <span class="material-icons-round">local_shipping</span>
+        پست‌چی
+      </div>
+      <div class="app-subtitle">پیگیری هوشمند مرسولات پستی</div>
+    </div>
 
-<header>
-  <div class="header-content">
-    <span class="material-icons header-icon">local_shipping</span>
-    <h1>پست‌چی</h1>
-  </div>
-</header>
-
-<div class="container">
-  <!-- آمار -->
-  <div class="stats">
-    <div class="stat">
-      <span class="material-icons stat-icon">inventory_2</span>
-      <div class="stat-content">
-        <div class="stat-number" id="totalCount">0</div>
-        <div class="stat-label">مرسوله</div>
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-value" id="totalCount">0</span>
+        <span class="stat-label">کل</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="todayCount">0</span>
+        <span class="stat-label">امروز</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value" id="weekCount">0</span>
+        <span class="stat-label">این هفته</span>
       </div>
     </div>
-    <div class="stat">
-      <span class="material-icons stat-icon">business</span>
-      <div class="stat-content">
-        <div class="stat-number" id="servicesCount">0</div>
-        <div class="stat-label">شرکت</div>
-      </div>
-    </div>
-  </div>
 
-  <!-- فرم افزودن -->
-  <div class="card">
-    <div class="card-title">
-      <span class="material-icons">add_circle_outline</span>
-      افزودن مرسوله جدید
-    </div>
-    
-    <div class="form-group">
-      <label>عنوان</label>
-      <input type="text" id="title" placeholder="مثلاً: خرید دیجی‌کالا">
-    </div>
-
-    <div class="form-group">
-      <label>کد پیگیری</label>
-      <input type="text" id="code" placeholder="کد رهگیری را وارد کنید" dir="ltr">
-    </div>
-
-    <div class="form-group">
-      <label>شرکت پستی</label>
-      <select id="service"></select>
-    </div>
-
-    <button class="btn btn-primary" onclick="addItem()">
-      <span class="material-icons">save</span>
-      ذخیره
-    </button>
-  </div>
-
-  <!-- لیست مرسوله‌ها -->
-  <div class="card">
-    <div class="card-title">
-      <span class="material-icons">list</span>
-      مرسوله‌های من
-    </div>
-    <div class="items-container" id="list"></div>
-  </div>
-</div>
-
-<!-- Toast -->
-<div class="toast" id="toast">
-  <span class="material-icons">info</span>
-  <span id="toastText"></span>
-</div>
-
-<script>
-// تمام شرکت‌های پستی ایران
-const SERVICES = {
-  post: {
-    name: 'پست ایران',
-    url: code => `https://tracking.post.ir/?id=${code}`
-  },
-  tipax: {
-    name: 'تیپاکس',
-    url: code => `https://tipaxco.com/tracking?code=${code}`
-  },
-  postex: {
-    name: 'پستکس',
-    url: code => `https://postex.ir/tracking?code=${code}`
-  },
-  chapar: {
-    name: 'چاپار',
-    url: code => `https://chapar.post.ir/track/${code}`
-  },
-  alopeyk: {
-    name: 'الوپیک',
-    url: code => `https://alopeyk.com/tracking/${code}`
-  },
-  miare: {
-    name: 'میاره',
-    url: code => `https://miare.ir/tracking?code=${code}`
-  },
-  snapp: {
-    name: 'اسنپ باکس',
-    url: code => `https://snapp.market/tracking/${code}`
-  },
-  mahex: {
-    name: 'ماهکس',
-    url: code => `https://mahex.com/track?code=${code}`
-  }
-};
-
-// پر کردن select
-function initServices() {
-  const select = document.getElementById('service');
-  select.innerHTML = Object.keys(SERVICES)
-    .map(key => `<option value="${key}">${SERVICES[key].name}</option>`)
-    .join('');
-}
-
-// Toast
-function showToast(msg, icon = 'info') {
-  const toast = document.getElementById('toast');
-  const toastText = document.getElementById('toastText');
-  const toastIcon = toast.querySelector('.material-icons');
-  
-  toastIcon.textContent = icon;
-  toastText.textContent = msg;
-  toast.classList.add('show');
-  setTimeout(() => toast.classList.remove('show'), 2500);
-}
-
-// localStorage
-function getItems() {
-  return JSON.parse(localStorage.getItem('postchi_parcels') || '[]');
-}
-
-function saveItems(items) {
-  localStorage.setItem('postchi_parcels', JSON.stringify(items));
-}
-
-// آمار
-function updateStats() {
-  const items = getItems();
-  document.getElementById('totalCount').textContent = items.length;
-  
-  const uniqueServices = new Set(items.map(i => i.service));
-  document.getElementById('servicesCount').textContent = uniqueServices.size;
-}
-
-// افزودن
-function addItem() {
-  const title = document.getElementById('title').value.trim();
-  const code = document.getElementById('code').value.trim();
-  const service = document.getElementById('service').value;
-
-  if (!code) {
-    showToast('کد پیگیری را وارد کنید', 'error');
-    return;
-  }
-
-  const items = getItems();
-  items.unshift({
-    id: Date.now(),
-    title: title || 'بدون عنوان',
-    code,
-    service,
-    createdAt: new Date().toLocaleDateString('fa-IR')
-  });
-  saveItems(items);
-
-  document.getElementById('title').value = '';
-  document.getElementById('code').value = '';
-  
-  showToast('مرسوله ذخیره شد', 'check_circle');
-  render();
-}
-
-// حذف
-function delItem(id) {
-  if (!confirm('این مرسوله حذف شود؟')) return;
-  saveItems(getItems().filter(i => i.id !== id));
-  showToast('مرسوله حذف شد', 'delete');
-  render();
-}
-
-// پیگیری
-function track(id) {
-  const item = getItems().find(i => i.id === id);
-  if (item) {
-    window.open(SERVICES[item.service].url(item.code), '_blank');
-    showToast('در حال باز کردن...', 'open_in_new');
-  }
-}
-
-// کپی
-function copyCode(code) {
-  navigator.clipboard.writeText(code).then(() => {
-    showToast('کد کپی شد', 'content_copy');
-  });
-}
-
-// نمایش
-function render() {
-  const items = getItems();
-  const list = document.getElementById('list');
-  
-  updateStats();
-
-  if (!items.length) {
-    list.innerHTML = `
-      <div class="empty">
-        <span class="material-icons empty-icon">inbox</span>
-        <div class="empty-text">هنوز مرسوله‌ای ثبت نشده</div>
-      </div>
-    `;
-    return;
-  }
-
-  list.innerHTML = items.map(i => `
-    <div class="item">
-      <div class="item-header">
-        <span class="material-icons item-icon">package_2</span>
-        <div class="item-content">
-          <div class="item-title">${i.title}</div>
-          <div class="item-service">${SERVICES[i.service].name}</div>
+    <div class="content-section">
+      <div class="add-card">
+        <div class="section-title">
+          <span class="material-icons-round">add_circle</span>
+          افزودن مرسوله جدید
         </div>
+        <form id="parcelForm">
+          <div class="form-group">
+            <label for="parcelTitle">عنوان مرسوله</label>
+            <input type="text" id="parcelTitle" placeholder="مثلاً: کتاب از آمازون" required>
+          </div>
+          <div class="form-group">
+            <label for="trackingCode">کد رهگیری</label>
+            <input type="text" id="trackingCode" placeholder="کد رهگیری را وارد کنید" required>
+          </div>
+          <div class="form-group">
+            <label for="company">شرکت پستی</label>
+            <select id="company" required>
+              <option value="">انتخاب کنید</option>
+              <option value="post">پست ایران</option>
+              <option value="tipax">تیپاکس</option>
+              <option value="chapar">چاپار</option>
+              <option value="mahex">ماهکس</option>
+              <option value="postbar">پست بار</option>
+            </select>
+          </div>
+          <button type="submit" class="btn-add">
+            <span class="material-icons-round">add</span>
+            افزودن مرسوله
+          </button>
+        </form>
       </div>
-      <div class="item-code">
-        <span class="material-icons">tag</span>
-        ${i.code}
-      </div>
-      <div class="item-actions">
-        <button class="btn-sm btn-track" onclick="track(${i.id})">
-          <span class="material-icons">send</span>
-          پیگیری
-        </button>
-        <button class="btn-sm btn-copy" onclick="copyCode('${i.code}')">
-          <span class="material-icons">content_copy</span>
-          کپی
-        </button>
-        <button class="btn-sm btn-del" onclick="delItem(${i.id})">
-          <span class="material-icons">delete</span>
-        </button>
+
+      <div class="parcels-section">
+        <div class="section-title">
+          <span class="material-icons-round">inventory_2</span>
+          مرسوله‌های من
+        </div>
+        <div id="parcelsList"></div>
       </div>
     </div>
-  `).join('');
-}
+  </div>
 
-// شروع
-initServices();
-render();
+  <div class="toast" id="toast">
+    <span class="material-icons-round">check_circle</span>
+    <span id="toastMessage"></span>
+  </div>
 
-// Service Worker
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register('sw.js');
-}
-</script>
+  <script>
+    const STORAGE_KEY = 'postchi_parcels';
+    const companies = {
+      post: { name: 'پست ایران', url: 'https://tracking.post.ir/search.aspx?id=' },
+      tipax: { name: 'تیپاکس', url: 'https://tipaxco.com/tracking/?tc=' },
+      chapar: { name: 'چاپار', url: 'https://chapar.post.ir/tracking/?id=' },
+      mahex: { name: 'ماهکس', url: 'https://mahex.net/tracking/?code=' },
+      postbar: { name: 'پست بار', url: 'https://tracking.postbar.ir/?code=' }
+    };
+
+    function loadParcels() {
+      const data = localStorage.getItem(STORAGE_KEY);
+      return data ? JSON.parse(data) : [];
+    }
+
+    function saveParcels(parcels) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(parcels));
+      updateStats();
+      renderParcels();
+    }
+
+    function updateStats() {
+      const parcels = loadParcels();
+      const now = new Date();
+      const today = new Date(now.getFullYear(), now.getMonth(), now.getDate()).getTime();
+      const weekAgo = today - (7 * 24 * 60 * 60 * 1000);
+
+      document.getElementById('totalCount').textContent = parcels.length;
+      document.getElementById('todayCount').textContent = parcels.filter(p => p.timestamp >= today).length;
+      document.getElementById('weekCount').textContent = parcels.filter(p => p.timestamp >= weekAgo).length;
+    }
+
+    function renderParcels() {
+      const parcels = loadParcels();
+      const container = document.getElementById('parcelsList');
+      
+      if (parcels.length === 0) {
+        container.innerHTML = `
+          <div class="empty-state">
+            <div class="material-icons-round">inventory_2</div>
+            <div class="empty-state-text">هنوز مرسوله‌ای اضافه نکرده‌اید</div>
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = parcels.map((parcel, index) => `
+        <div class="parcel-card">
+          <div class="parcel-header">
+            <div class="parcel-title">${parcel.title}</div>
+            <div class="parcel-company">${companies[parcel.company].name}</div>
+          </div>
+          <div class="parcel-code">${parcel.code}</div>
+          <div class="parcel-actions">
+            <button class="btn-action btn-track" onclick="trackParcel('${parcel.company}', '${parcel.code}')">
+              <span class="material-icons-round">search</span>
+              پیگیری
+            </button>
+            <button class="btn-action btn-copy" onclick="copyCode('${parcel.code}')">
+              <span class="material-icons-round">content_copy</span>
+              کپی
+            </button>
+            <button class="btn-action btn-delete" onclick="deleteParcel(${index})">
+              <span class="material-icons-round">delete</span>
+              حذف
+            </button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      document.getElementById('toastMessage').textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => toast.classList.remove('show'), 3000);
+    }
+
+    function trackParcel(company, code) {
+      const url = companies[company].url + code;
+      window.open(url, '_blank');
+    }
+
+    function copyCode(code) {
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('کد رهگیری کپی شد');
+      });
+    }
+
+    function deleteParcel(index) {
+      const parcels = loadParcels();
+      parcels.splice(index, 1);
+      saveParcels(parcels);
+      showToast('مرسوله حذف شد');
+    }
+
+    document.getElementById('parcelForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      const title = document.getElementById('parcelTitle').value;
+      const code = document.getElementById('trackingCode').value;
+      const company = document.getElementById('company').value;
+      
+      const parcels = loadParcels();
+      parcels.unshift({
+        title,
+        code,
+        company,
+        timestamp: Date.now()
+      });
+      
+      saveParcels(parcels);
+      showToast('مرسوله با موفقیت اضافه شد');
+      e.target.reset();
+    });
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+
+    updateStats();
+    renderParcels();
+  </script>
 </body>
 </html>
