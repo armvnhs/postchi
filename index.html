@@ -64,23 +64,29 @@
     .app-title .icon-badge {
       width: 44px;
       height: 44px;
-      background: var(--yellow);
       border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      overflow: hidden;
+      flex-shrink: 0;
+      display: block;
     }
 
-    .app-title .icon-badge .material-icons-round {
-      font-size: 26px;
-      color: #0f0f0f;
+    .app-title .icon-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .total-badge {
       background: var(--surface);
       border: 1px solid var(--border);
       border-radius: 14px;
-      padding: 8px 16px;
+      padding: 0 16px;
+      height: 44px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       text-align: center;
     }
 
@@ -97,6 +103,34 @@
       color: var(--text-muted);
       font-weight: 500;
     }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .quick-add-btn {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 14px;
+      background: var(--yellow);
+      color: #0f0f0f;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .quick-add-btn .material-icons-round {
+      font-size: 24px;
+    }
+
+    .quick-add-btn:hover { background: var(--yellow-dark); }
+    .quick-add-btn:active { transform: scale(0.92); }
 
     .content-section {
       padding: 0 20px 40px;
@@ -328,57 +362,95 @@
       opacity: 1;
       transform: translateX(-50%) translateY(0);
     }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s;
+    }
+
+    .modal-overlay.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-sheet {
+      width: 100%;
+      max-width: 480px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 24px 24px 0 0;
+      padding: 22px;
+      max-height: 88vh;
+      overflow-y: auto;
+      transform: translateY(24px);
+      transition: transform 0.25s;
+    }
+
+    .modal-overlay.show .modal-sheet {
+      transform: translateY(0);
+    }
+
+    @media (min-width: 540px) {
+      .modal-overlay {
+        align-items: center;
+      }
+
+      .modal-sheet {
+        border-radius: 24px;
+      }
+    }
+
+    .modal-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 18px;
+    }
+
+    .modal-close {
+      width: 34px;
+      height: 34px;
+      border: none;
+      border-radius: 10px;
+      background: var(--surface-2);
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+
+    .modal-close:hover { background: var(--border); }
   </style>
 </head>
 <body>
   <div class="app-container">
     <div class="app-header">
       <div class="app-title">
-        <span class="icon-badge"><span class="material-icons-round">inventory_2</span></span>
+        <span class="icon-badge"><img src="./icon.png" alt="PostChi"></span>
         پست‌چی
       </div>
-      <div class="total-badge">
-        <span class="stat-value" id="totalCount">0</span>
-        <span class="stat-label">مرسوله</span>
+      <div class="header-actions">
+        <div class="total-badge">
+          <span class="stat-value" id="totalCount">0</span>
+          <span class="stat-label">مرسوله</span>
+        </div>
+        <button type="button" class="quick-add-btn" id="quickAddBtn" aria-label="Add parcel">
+          <span class="material-icons-round">add</span>
+        </button>
       </div>
     </div>
 
     <div class="content-section">
-      <div class="add-card">
-        <div class="section-title">
-          <span class="material-icons-round">add_circle</span>
-          افزودن مرسوله جدید
-        </div>
-        <form id="parcelForm">
-          <div class="form-group">
-            <label for="parcelTitle">عنوان مرسوله</label>
-            <input type="text" id="parcelTitle" placeholder="مثلاً: کتاب از دیجی‌کالا" required>
-          </div>
-          <div class="form-group">
-            <label for="trackingCode">کد رهگیری</label>
-            <input type="text" id="trackingCode" placeholder="کد رهگیری را وارد کنید" required>
-          </div>
-          <div class="form-group">
-            <label for="company">شرکت پستی</label>
-            <select id="company" required>
-              <option value="">انتخاب کنید</option>
-              <option value="post">پست ایران</option>
-              <option value="tipax">تیپاکس</option>
-              <option value="postex">پستکس</option>
-              <option value="chapar">چاپار</option>
-              <option value="alopeyk">الوپیک</option>
-              <option value="miare">میاره</option>
-              <option value="snappbox">اسنپ باکس</option>
-              <option value="mahex">ماهکس</option>
-            </select>
-          </div>
-          <button type="submit" class="btn-add">
-            <span class="material-icons-round">add</span>
-            افزودن مرسوله
-          </button>
-        </form>
-      </div>
-
       <div class="parcels-section">
         <div class="section-title">
           <span class="material-icons-round">inventory_2</span>
@@ -386,6 +458,48 @@
         </div>
         <div id="parcelsList"></div>
       </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-sheet">
+      <div class="modal-header">
+        <div class="section-title" style="margin-bottom:0;">
+          <span class="material-icons-round">add_circle</span>
+          افزودن مرسوله جدید
+        </div>
+        <button type="button" class="modal-close" id="modalCloseBtn" aria-label="Close">
+          <span class="material-icons-round">close</span>
+        </button>
+      </div>
+      <form id="parcelForm">
+        <div class="form-group">
+          <label for="parcelTitle">عنوان مرسوله</label>
+          <input type="text" id="parcelTitle" placeholder="مثلاً: کتاب از دیجی‌کالا" required>
+        </div>
+        <div class="form-group">
+          <label for="trackingCode">کد رهگیری</label>
+          <input type="text" id="trackingCode" placeholder="کد رهگیری را وارد کنید" required>
+        </div>
+        <div class="form-group">
+          <label for="company">شرکت پستی</label>
+          <select id="company" required>
+            <option value="">انتخاب کنید</option>
+            <option value="post">پست ایران</option>
+            <option value="tipax">تیپاکس</option>
+            <option value="postex">پستکس</option>
+            <option value="chapar">چاپار</option>
+            <option value="alopeyk">الوپیک</option>
+            <option value="miare">میاره</option>
+            <option value="snappbox">اسنپ باکس</option>
+            <option value="mahex">ماهکس</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-add">
+          <span class="material-icons-round">add</span>
+          افزودن مرسوله
+        </button>
+      </form>
     </div>
   </div>
 
@@ -438,6 +552,10 @@
           <div class="empty-state">
             <span class="material-icons-round">inbox</span>
             <div class="empty-state-text">هنوز مرسوله‌ای اضافه نکردی</div>
+            <button type="button" class="btn-add" style="margin-top:18px;" onclick="document.getElementById('quickAddBtn').click()">
+              <span class="material-icons-round">add</span>
+              افزودن مرسوله
+            </button>
           </div>`;
         return;
       }
@@ -477,6 +595,7 @@
       save();
       render();
       form.reset();
+      closeModal();
       showToast('مرسوله اضافه شد');
     });
 
@@ -503,6 +622,28 @@
       }
     }
 
+    const modalOverlay = document.getElementById('modalOverlay');
+
+    function openModal() {
+      modalOverlay.classList.add('show');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => document.getElementById('parcelTitle').focus(), 200);
+    }
+
+    function closeModal() {
+      modalOverlay.classList.remove('show');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('quickAddBtn').addEventListener('click', openModal);
+    document.getElementById('modalCloseBtn').addEventListener('click', closeModal);
+    modalOverlay.addEventListener('click', e => {
+      if (e.target === modalOverlay) closeModal();
+    });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && modalOverlay.classList.contains('show')) closeModal();
+    });
+
     if ('serviceWorker' in navigator) {
       navigator.serviceWorker.register('./sw.js');
     }
@@ -511,4 +652,3 @@
   </script>
 </body>
 </html>
-
