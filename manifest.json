@@ -1,0 +1,21 @@
+{
+  "name": "پست‌چی - پیگیری مرسوله",
+  "short_name": "پست‌چی",
+  "description": "پیگیری آسان مرسوله‌های پستی ایران",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f8fafc",
+  "theme_color": "#0ea5e9",
+  "dir": "rtl",
+  "lang": "fa",
+  "icons": [
+    {
+      "src": "icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
