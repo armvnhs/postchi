@@ -387,4 +387,128 @@
         <div id="parcelsList"></div>
       </div>
     </div>
-  </
+  </div>
+
+  <div class="toast" id="toast">
+    <span class="material-icons-round">check_circle</span>
+    <span id="toastText"></span>
+  </div>
+
+  <script>
+    const companies = {
+      post:     { name: 'پست ایران',  url: code => `https://tracking.post.ir/?id=${code}` },
+      tipax:    { name: 'تیپاکس',     url: code => `https://tipaxco.com/tracking/${code}` },
+      postex:   { name: 'پستکس',      url: code => `https://postex.ir/tracking/${code}` },
+      chapar:   { name: 'چاپار',      url: code => `https://chaparapp.ir/panel/track/${code}` },
+      alopeyk:  { name: 'الوپیک',     url: code => `https://alopeyk.com/tracking?code=${code}` },
+      miare:    { name: 'میاره',      url: code => `https://miare.ir/tracking/${code}` },
+      snappbox: { name: 'اسنپ باکس',  url: code => `https://tracking.snapp-box.com/?code=${code}` },
+      mahex:    { name: 'ماهکس',      url: code => `https://mahex.com/track/${code}` }
+    };
+
+    let parcels = JSON.parse(localStorage.getItem('parcels') || '[]');
+
+    const form = document.getElementById('parcelForm');
+    const listEl = document.getElementById('parcelsList');
+    const totalEl = document.getElementById('totalCount');
+    const toastEl = document.getElementById('toast');
+    const toastText = document.getElementById('toastText');
+
+    function save() {
+      localStorage.setItem('parcels', JSON.stringify(parcels));
+    }
+
+    function showToast(msg) {
+      toastText.textContent = msg;
+      toastEl.classList.add('show');
+      setTimeout(() => toastEl.classList.remove('show'), 2200);
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+
+    function render() {
+      totalEl.textContent = parcels.length;
+
+      if (parcels.length === 0) {
+        listEl.innerHTML = `
+          <div class="empty-state">
+            <span class="material-icons-round">inbox</span>
+            <div class="empty-state-text">هنوز مرسوله‌ای اضافه نکردی</div>
+          </div>`;
+        return;
+      }
+
+      listEl.innerHTML = parcels.map(p => `
+        <div class="parcel-card">
+          <div class="parcel-header">
+            <div class="parcel-title">${escapeHtml(p.title)}</div>
+            <div class="parcel-company">${companies[p.company].name}</div>
+          </div>
+          <span class="parcel-code">${escapeHtml(p.code)}</span>
+          <div class="parcel-actions">
+            <button class="btn-action btn-track" onclick="trackParcel('${p.id}')">
+              <span class="material-icons-round">open_in_new</span>
+              پیگیری
+            </button>
+            <button class="btn-action btn-copy" onclick="copyCode('${p.id}')">
+              <span class="material-icons-round">content_copy</span>
+              کپی کد
+            </button>
+            <button class="btn-action btn-delete" onclick="deleteParcel('${p.id}')">
+              <span class="material-icons-round">delete</span>
+              حذف
+            </button>
+          </div>
+        </div>`).join('');
+    }
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+      parcels.unshift({
+        id: Date.now().toString(),
+        title: document.getElementById('parcelTitle').value.trim(),
+        code: document.getElementById('trackingCode').value.trim(),
+        company: document.getElementById('company').value
+      });
+      save();
+      render();
+      form.reset();
+      showToast('مرسوله اضافه شد');
+    });
+
+    function trackParcel(id) {
+      const p = parcels.find(x => x.id === id);
+      if (p) window.open(companies[p.company].url(p.code), '_blank');
+    }
+
+    function copyCode(id) {
+      const p = parcels.find(x => x.id === id);
+      if (p) {
+        navigator.clipboard.writeText(p.code)
+          .then(() => showToast('کد رهگیری کپی شد'))
+          .catch(() => showToast('خطا در کپی کردن'));
+      }
+    }
+
+    function deleteParcel(id) {
+      if (confirm('این مرسوله حذف بشه؟')) {
+        parcels = parcels.filter(x => x.id !== id);
+        save();
+        render();
+        showToast('مرسوله حذف شد');
+      }
+    }
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('./sw.js');
+    }
+
+    render();
+  </script>
+</body>
+</html>
+
